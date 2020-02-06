@@ -31,12 +31,6 @@ typedef struct player_s
     int **map_ennemy;
 } player_t;
 
-typedef struct game_s
-{
-    player_t *player_one;
-    player_t *player_two;
-} game_t;
-
 int navy(int argc, char **argv);
 char **get_player_map(char *filepath);
 bool check_map_errors(char **map, char *buffer);
