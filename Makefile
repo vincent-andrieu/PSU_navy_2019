@@ -6,7 +6,9 @@
 ##
 
 SRC =   src/main.c	\
-		src/navy.c
+		src/navy.c	\
+		src/map.c	\
+		src/map_errors.c
 
 OBJ =   $(SRC:.c=.o)
 

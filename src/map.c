@@ -2,9 +2,10 @@
 ** EPITECH PROJECT, 2019
 ** navy
 ** File description:
-** navy
+** get maps
 */
 
+#include <fcntl.h>
 #include "my.h"
 #include "navy.h"
 
@@ -15,8 +16,7 @@ static int **get_int_array(void)
     if (!my_map)
         return NULL;
     my_map[MAP_SIZE] = NULL;
-    for (int i = 0; i < MAP_SIZE; i++)
-    {
+    for (int i = 0; i < MAP_SIZE; i++) {
         my_map[i] = malloc(sizeof(int) * MAP_SIZE);
         if (!my_map[i])
             return NULL;
@@ -32,7 +32,7 @@ static int array_filler(int **my_map, char *line)
     char **tab = my_str_to_array(line, ":", false);
 
     if (!tab)
-        return 84;
+        return EXIT_ERROR;
     boat_size = my_getnbr(tab[0]);
     if (tab[1][0] == tab[2][0])
         for (int i = my_getnbr(tab[1] + 1) - 1; i < my_getnbr(tab[2] + 1); i++)
@@ -46,19 +46,33 @@ static int array_filler(int **my_map, char *line)
     return 0;
 }
 
-int **get_int_array_from_map(char **map)
+static int **get_int_array_from_map(char **map)
 {
-    int ret;
     int **my_map = get_int_array();
 
     if (!my_map)
         return NULL;
-    for (int i = 0; map[i]; i++) {
-        ret = array_filler(my_map, map[i]);
-        if (ret == 84)
+    for (int i = 0; map[i]; i++)
+        if (array_filler(my_map, map[i]) == EXIT_ERROR)
             return NULL;
-    }
     return my_map;
+}
+
+int **get_map(char *filepath)
+{
+    int fd = open(filepath, O_RDONLY);
+    char buffer[FILE_SIZE];
+    int size = fd != -1 ? read(fd, buffer, FILE_SIZE + 1) : -1;
+    char **map;
+
+    close(fd);
+    if (size != FILE_SIZE)
+        return NULL;
+    buffer[size] = '\0';
+    map = my_str_to_array(buffer, "\n", false);
+    if (map == NULL || check_map_errors(map))
+        return NULL;
+    return get_int_array_from_map(map);
 }
 
 void my_display_map(int **my_map)
@@ -82,21 +96,4 @@ void my_display_map(int **my_map)
         }
         my_putchar('\n');
     }
-}
-
-int main(void)
-{
-    char *map[] = { "2:C1:C2",
-                    "3:D4:F4",
-                    "4:B5:B8",
-                    "5:D7:H7",
-                    NULL};
-    int **my_map = get_int_array_from_map(map);
-    my_display_map(my_map);
-
-    
-    for (int y = 0; my_map[y]; y++)
-        free(my_map[y]);
-    free(my_map);
-    return 0;
 }

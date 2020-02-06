@@ -23,7 +23,7 @@
 #define SEA_VALUE 0
 
 #define MSG_LOSE "Enemy won"
-#define MSG_LOSE "I won"
+#define MSG_WIN "I won"
 
 typedef struct player_s
 {
@@ -32,7 +32,7 @@ typedef struct player_s
 } player_t;
 
 int navy(int argc, char **argv);
-char **get_player_map(char *filepath);
-bool check_map_errors(char **map, char *buffer);
+int **get_map(char *filepath);
+bool check_map_errors(char **map);
 
 #endif
