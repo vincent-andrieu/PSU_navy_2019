@@ -70,11 +70,11 @@ void my_display_map(int **my_map)
         my_putchar('|');
         for (int x = 0; x < MAP_SIZE; x++) {
             if (my_map[y][x] == -1)
-                my_putstr("o");
+                my_putstr(MISS);
             if (my_map[y][x] == -2)
-                my_putstr("x");
+                my_putstr(HIT);
             if (my_map[y][x] == SEA_VALUE)
-                my_putstr(".");
+                my_putstr(SEA);
             if (my_map[y][x] != -1 && my_map[y][x] != -2 && my_map[y][x] != 0)
                 my_put_nbr(my_map[y][x]);
             if (x + 1 < MAP_SIZE)
