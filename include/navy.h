@@ -22,10 +22,13 @@
 #define SEA "."
 #define SEA_VALUE 0
 
+#define MSG_LOSE "Enemy won"
+#define MSG_LOSE "I won"
+
 typedef struct player_s
 {
-    char **map_player;
-    char **map_ennemy;
+    int **map_player;
+    int **map_ennemy;
 } player_t;
 
 typedef struct game_s
