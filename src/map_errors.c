@@ -13,6 +13,7 @@ static bool check_coords(char *str)
     str[1] = '\0';
     if (!my_str_isnum(str))
         return true;
+    str[1] = ':';
     str += 2;
     if (!((str[0] == str[3]) ^ (str[1] == str[4])))
         return true;
