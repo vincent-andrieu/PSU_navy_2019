@@ -10,14 +10,24 @@
 
 static bool check_coords(char *str)
 {
+    int size;
+    int i;
+
     str[1] = '\0';
     if (!my_str_isnum(str))
         return true;
+    size = my_getnbr(str);
     str[1] = ':';
     str += 2;
     if (!((str[0] == str[3]) ^ (str[1] == str[4])))
         return true;
     if (str[0] >= str[3] && str[1] >= str[4])
+        return true;
+    for (i = str[0]; i <= str[3]; i++);
+    if (str[0] != str[3] && i - str[0] != size)
+        return true;
+    for (i = str[1]; i <= str[4]; i++);
+    if (str[1] != str[4] && i - str[1] != size)
         return true;
     return false;
 }
