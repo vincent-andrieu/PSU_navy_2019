@@ -5,10 +5,12 @@
 ## project makefile
 ##
 
-SRC =   src/main.c	\
-		src/navy.c	\
-		src/map.c	\
-		src/map_errors.c
+SRC =   src/main.c			\
+		src/navy.c			\
+		src/map.c			\
+		src/map_errors.c	\
+		src/send.c			\
+		src/receive.c
 
 OBJ =   $(SRC:.c=.o)
 
