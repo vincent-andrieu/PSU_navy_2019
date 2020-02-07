@@ -22,6 +22,9 @@
 #define SEA "."
 #define SEA_VALUE 0
 
+#define MISS_VALUE -1
+#define HIT_VALUE -2
+
 #define MSG_LOSE "Enemy won"
 #define MSG_WIN "I won"
 

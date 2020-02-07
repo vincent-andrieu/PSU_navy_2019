@@ -83,9 +83,9 @@ void my_display_map(int **my_map)
         my_put_nbr(y + 1);
         my_putchar('|');
         for (int x = 0; x < MAP_SIZE; x++) {
-            if (my_map[y][x] == -1)
+            if (my_map[y][x] == MISS_VALUE)
                 my_putstr(MISS);
-            if (my_map[y][x] == -2)
+            if (my_map[y][x] == HIT_VALUE)
                 my_putstr(HIT);
             if (my_map[y][x] == SEA_VALUE)
                 my_putstr(SEA);
