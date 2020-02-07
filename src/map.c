@@ -5,6 +5,7 @@
 ** get maps
 */
 
+#include <unistd.h>
 #include <fcntl.h>
 #include "my.h"
 #include "navy.h"
@@ -70,8 +71,11 @@ int **get_map(char *filepath)
         return NULL;
     buffer[size] = '\0';
     map = my_str_to_array(buffer, "\n", false);
-    if (map == NULL || check_map_errors(map))
+    if (map == NULL || check_map_errors(map)) {
+        for (int i = 0; map[i] != NULL; free(map[i]), i++);
+        free(map);
         return NULL;
+    }
     return get_int_array_from_map(map);
 }
 
