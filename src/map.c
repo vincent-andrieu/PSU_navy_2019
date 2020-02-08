@@ -100,4 +100,5 @@ void my_display_map(int **my_map)
         }
         my_putchar('\n');
     }
+    my_putchar('\n');
 }
