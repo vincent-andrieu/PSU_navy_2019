@@ -9,6 +9,7 @@ SRC =   src/main.c			\
 		src/navy.c			\
 		src/map.c			\
 		src/map_errors.c	\
+		src/init.c			\
 		src/send.c			\
 		src/receive.c
 

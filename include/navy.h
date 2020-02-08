@@ -46,6 +46,7 @@ int navy(int argc, char **argv);
 int **get_map(char *filepath);
 bool check_map_errors(char **map);
 
+int init_connection(int argc, char *str_pid);
 int send_values(int pid, int x, int y);
 receive_t receive_values();
 void increase_status(__attribute((unused))int sig,
