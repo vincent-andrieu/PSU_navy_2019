@@ -10,7 +10,7 @@
 #include "my.h"
 #include "navy.h"
 
-static int **get_int_array(void)
+int **get_int_array(void)
 {
     int **my_map = malloc(sizeof(int *) * (MAP_SIZE + 1));
 
