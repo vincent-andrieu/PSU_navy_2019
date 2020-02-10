@@ -17,7 +17,7 @@ static int get_enemy_pid(void)
     receive = receive_values();
     if (receive.x != CONNECT_VALS || receive.y != CONNECT_VALS)
         return -1;
-    my_putstr("\nenemy connected\n");
+    my_putstr("\nenemy connected\n\n");
     return receive.pid;
 }
 
@@ -29,7 +29,7 @@ static int send_pid(char *enemy_pid)
         return -1;
     if (send_values(pid, CONNECT_VALS, CONNECT_VALS) != EXIT_SUCCESS)
         return -1;
-    my_putstr("successfully connected\n");
+    my_putstr("successfully connected\n\n");
     return pid;
 }
 

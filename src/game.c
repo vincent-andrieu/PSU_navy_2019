@@ -32,7 +32,7 @@ static int is_finish(player_t *player)
 
 void put_positions(player_t *player)
 {
-    my_putstr("\nmy positions:\n");
+    my_putstr("my positions:\n");
     my_display_map(player->map_player);
     my_putstr("enemy's positions:\n");
     my_display_map(player->map_enemy);

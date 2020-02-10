@@ -28,7 +28,8 @@ int defend(player_t *player, int pid)
 {
     receive_t receive;
 
-    put_positions(player);
+    if (!player->toggle)
+        put_positions(player);
     my_putstr("waiting for enemy's attack...\n");
     receive = receive_values();
     if (receive.pid != pid)

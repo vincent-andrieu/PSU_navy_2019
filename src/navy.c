@@ -26,6 +26,7 @@ static player_t *get_player_maps(int argc, char **argv)
 
     if (player == NULL)
         return NULL;
+    player->toggle = argc == 2;
     player->map_player = get_map(argv[argc == 3 ? 2 : 1]);
     player->map_enemy = get_int_array();
     if (player->map_player == NULL || player->map_enemy == NULL)

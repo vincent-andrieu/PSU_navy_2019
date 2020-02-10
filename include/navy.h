@@ -34,6 +34,7 @@
 
 typedef struct player_s
 {
+    bool toggle;
     int **map_player;
     int **map_enemy;
 } player_t;
@@ -62,7 +63,6 @@ void increase_values(__attribute((unused))int sig, siginfo_t *siginfo,
 int game(player_t *player, int pid, bool is_player);
 void my_display_map(int **my_map);
 void put_positions(player_t *player);
-void edit_map(player_t *player, int pid, int const x, int const y);
 int attack(player_t *player, int pid);
 int defend(player_t *player, int pid);
 
