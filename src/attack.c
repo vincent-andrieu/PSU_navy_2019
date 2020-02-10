@@ -18,8 +18,10 @@ static char *ask_attack(void)
         return NULL;
     my_putstr("attack: ");
     size = read(0, pos, 4);
-    if (size != 3 || pos[2] != '\n')
+    if (size != 3 || pos[2] != '\n') {
+        free(pos);
         return NULL;
+    }
     pos[2] = '\0';
     return pos;
 }
