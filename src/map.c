@@ -37,10 +37,14 @@ static int array_filler(int **my_map, char *line)
     boat_size = my_getnbr(tab[0]);
     if (tab[1][0] == tab[2][0])
         for (int i = my_getnbr(tab[1] + 1) - 1; i < my_getnbr(tab[2] + 1); i++)
-            my_map[i][tab[1][0] - 65] = boat_size;
+            if (my_map[i][tab[1][0] - 65] != 0)
+                return 84;
+            else my_map[i][tab[1][0] - 65] = boat_size;
     else
         for (int i = tab[1][0] - 65; i <= tab[2][0] - 65; i++)
-            my_map[my_getnbr(tab[1] + 1) - 1][i] = boat_size;
+            if (my_map[my_getnbr(tab[1] + 1) - 1][i] != 0)
+                return 84;
+            else my_map[my_getnbr(tab[1] + 1) - 1][i] = boat_size;
     for (int i = 0; tab[i]; i++)
         free(tab[i]);
     free(tab);
