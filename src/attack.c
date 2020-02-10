@@ -32,10 +32,10 @@ static int is_touched(int pid, char *attack, int **map_enemy)
     if (receive.pid != pid)
         return EXIT_ERROR;
     if (receive.x == 1 && receive.y == 0) {
-        map_enemy[attack[0] - 'A'][attack[1] - '0' - 1] = HIT_VALUE;
+        map_enemy[attack[1] - '0' - 1][attack[0] - 'A'] = HIT_VALUE;
         my_putstr(": hit\n\n");
     } else if (receive.x == 0 && receive.y == 1) {
-        map_enemy[attack[0] - 'A'][attack[1] - '0' - 1] = MISS_VALUE;
+        map_enemy[attack[1] - '0' - 1][attack[0] - 'A'] = MISS_VALUE;
         my_putstr(": missed\n\n");
     } else
         return EXIT_ERROR;
