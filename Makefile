@@ -13,7 +13,6 @@ SRC =   src/main.c			\
 		src/send.c			\
 		src/receive.c		\
 		src/game.c			\
-		src/game_edit.c			\
 		src/attack.c		\
 		src/defend.c
 
