@@ -65,6 +65,7 @@ static int **get_int_array_from_map(char **map)
 
 int **get_map(char *filepath)
 {
+    int **int_array;
     int fd = open(filepath, O_RDONLY);
     char buffer[FILE_SIZE];
     int size = fd != -1 ? read(fd, buffer, FILE_SIZE + 1) : -1;
@@ -76,11 +77,14 @@ int **get_map(char *filepath)
     buffer[size] = '\0';
     map = my_str_to_array(buffer, "\n", false);
     if (map == NULL || check_map_errors(map)) {
-        for (int i = 0; map[i] != NULL; free(map[i]), i++);
+        for (int i = 0; map != NULL && map[i] != NULL; free(map[i]), i++);
         free(map);
         return NULL;
     }
-    return get_int_array_from_map(map);
+    int_array = get_int_array_from_map(map);
+    for (int i = 0; map[i]; free(map[i]), i++);
+    free(map);
+    return (!int_array) ? NULL : int_array;
 }
 
 void my_display_map(int **my_map)
