@@ -17,7 +17,7 @@
 #define NBR_BOATS 4
 #define MAX_HITS_NBR 14
 #define MAP_SIZE 8
-#define N_TRANS_SLEEP 5 * 1000
+#define N_TRANS_SLEEP 10 * 1000
 #define CONNECT_VALS 10
 
 #define HIT "x"

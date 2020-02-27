@@ -72,8 +72,6 @@ int **get_map(char *filepath)
     char **map;
 
     close(fd);
-    //if (size != FILE_SIZE)
-      //  return NULL;
     buffer[size] = '\0';
     map = my_str_to_array(buffer, "\n", false);
     if (map == NULL || check_map_errors(map)) {
