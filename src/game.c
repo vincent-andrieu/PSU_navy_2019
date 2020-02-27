@@ -14,7 +14,7 @@ static int is_finish(player_t *player)
 
     for (int i = 0; player->map_enemy[i] != NULL; i++)
         for (int k = 0; k < MAP_SIZE; k++)
-             n += player->map_enemy[i][k] == HIT_VALUE;
+            n += player->map_enemy[i][k] == HIT_VALUE;
     if (n >= MAX_HITS_NBR) {
         my_putstr(MSG_WIN);
         return EXIT_WIN;
@@ -22,7 +22,7 @@ static int is_finish(player_t *player)
     n = 0;
     for (int i = 0; player->map_player[i] != NULL; i++)
         for (int k = 0; k < MAP_SIZE; k++)
-             n += player->map_player[i][k] == HIT_VALUE;
+            n += player->map_player[i][k] == HIT_VALUE;
     if (n >= MAX_HITS_NBR) {
         my_putstr(MSG_LOSE);
         return EXIT_LOSE;
