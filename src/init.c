@@ -13,11 +13,11 @@ static int get_enemy_pid(void)
 {
     receive_t receive;
 
-    my_putstr("waiting for enemy connection...\n");
+    my_putstr("waiting for enemy connection...\n\n");
     receive = receive_values();
     if (receive.x != CONNECT_VALS || receive.y != CONNECT_VALS)
         return -1;
-    my_putstr("\nenemy connected\n\n");
+    my_putstr("enemy connected\n\n");
     return receive.pid;
 }
 
