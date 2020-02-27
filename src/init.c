@@ -38,7 +38,7 @@ static int init_signals(void)
     struct sigaction act;
     sigset_t sa_mask;
 
-    my_putstr("my_pid:\t");
+    my_putstr("my_pid: ");
     my_put_nbr(getpid());
     my_putchar('\n');
     if (sigemptyset(&sa_mask) == -1)
