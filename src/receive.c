@@ -50,7 +50,7 @@ void increase_values(__attribute((unused))int sig, siginfo_t *siginfo,
     get_value(true, &siginfo->si_pid);
 }
 
-receive_t receive_values()
+receive_t receive_values(void)
 {
     receive_t receive;
 
