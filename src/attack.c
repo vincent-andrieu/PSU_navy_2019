@@ -5,20 +5,25 @@
 ** attack ships
 */
 
+#include <stdio.h>
 #include <unistd.h>
 #include "my.h"
 #include "navy.h"
 
 static char *ask_attack(void)
 {
-    char *pos = malloc(sizeof(char) * 4);
-    int size;
+    char *pos = NULL;
+    size_t size = 0;
+    int read_size;
 
-    if (pos == NULL)
-        return NULL;
     my_putstr("attack: ");
-    size = read(0, pos, 4);
-    if (size != 3 || pos[2] != '\n') {
+    read_size = getline(&pos, &size, stdin);
+    if (read_size == -1) {
+        free(pos);
+        my_put_error_str("Read failure\n");
+        return NULL;
+    }
+    if (my_strlen(pos) > 2 && (pos[2] != '\n' && pos[2] != '\0')) {
         free(pos);
         return NULL;
     }
