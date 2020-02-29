@@ -8,55 +8,43 @@
 #include "my.h"
 #include "navy.h"
 
-static bool does_wait(bool does_toggle)
-{
-    static bool status = true;
-
-    if (!does_toggle && !status) {
-        status = true;
-        return false;
-    }
-    if (does_toggle)
-        status = false;
-    return status;
-}
-
-void increase_status(__attribute((unused))int sig,
-                    __attribute((unused))siginfo_t *siginfo,
-                    __attribute((unused))void *context)
-{
-    does_wait(true);
-}
-
-static int get_value(bool does_increase, int *rec_pid)
+static int calc_bits(bool reset, bool bit, int *sig_pid)
 {
     static int pid = 0;
+    static int count = 0;
     static int value = 0;
-    int result = value;
+    int result = 0;
 
-    if (does_increase) {
-        pid = *rec_pid;
-        value++;
-    } else {
-        *rec_pid = pid;
+    if (count >= 6 && reset) {
+        for (int i = 0; i < 6; i++, value >>= 1) {
+            result <<= 1;
+            result += value & 0b00000001;
+        }
+        count = 0;
         value = 0;
+        *sig_pid = pid;
+        return result;
+    } else if (!reset) {
+        value = (value << 1) + bit;
+        count++;
+        pid = *sig_pid;
     }
-    return result;
+    return -1;
 }
 
-void increase_values(__attribute((unused))int sig, siginfo_t *siginfo,
-                    __attribute((unused))void *context)
+void sig_signal(int sig, siginfo_t *siginfo, __attribute((unused))void *context)
 {
-    get_value(true, &siginfo->si_pid);
+    calc_bits(false, sig == SIGUSR1, &siginfo->si_pid);
 }
 
 receive_t receive_values(void)
 {
     receive_t receive;
+    int value = -1;
 
-    while (does_wait(false));
-    receive.x = get_value(false, &receive.pid);
-    while (does_wait(false));
-    receive.y = get_value(false, &receive.pid);
+    while (value == -1)
+        value = calc_bits(true, false, &receive.pid);
+    receive.x = value & 0b00000111;
+    receive.y = (value & 0b00111000) >> 3;
     return receive;
 }

@@ -72,6 +72,8 @@ int **get_map(char *filepath)
     char **map;
 
     close(fd);
+    if (size == -1)
+        return NULL;
     buffer[size] = '\0';
     map = my_str_to_array(buffer, "\n", false);
     if (map == NULL || check_map_errors(map)) {
@@ -82,7 +84,7 @@ int **get_map(char *filepath)
     int_array = get_int_array_from_map(map);
     for (int i = 0; map[i]; free(map[i]), i++);
     free(map);
-    return (!int_array) ? NULL : int_array;
+    return int_array;
 }
 
 void my_display_map(int **my_map)

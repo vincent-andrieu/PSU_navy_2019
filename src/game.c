@@ -6,6 +6,7 @@
 */
 
 #include <my.h>
+#include <stdio.h>
 #include "navy.h"
 
 static int is_finish(player_t *player)
@@ -43,10 +44,10 @@ int game(player_t *player, int pid, bool is_player)
     int exit_value;
 
     if (is_player) {
-        if (attack(player, pid) != EXIT_SUCCESS)
+        if (attack(player, pid, NULL) == EXIT_ERROR)
             return EXIT_ERROR;
     } else
-        if (defend(player, pid) != EXIT_SUCCESS)
+        if (defend(player, pid, false) == EXIT_ERROR)
             return EXIT_ERROR;
     exit_value = is_finish(player);
     if (exit_value == EXIT_WIN)

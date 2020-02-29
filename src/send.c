@@ -10,17 +10,10 @@
 
 int send_values(int pid, int x, int y)
 {
-    for (int i = 0; i < x; i++, usleep(N_TRANS_SLEEP))
-        if (kill(pid, SIGUSR1))
+    int value = (y << 3) + x;
+
+    for (int i = 0; i < 6; i++, value >>= 1, usleep(N_TRANS_SLEEP))
+        if (kill(pid, value & 0b00000001 ? SIGUSR1 : SIGUSR2))
             return EXIT_ERROR;
-    if (kill(pid, SIGUSR2))
-        return EXIT_ERROR;
-    usleep(N_TRANS_SLEEP);
-    for (int i = 0; i < y; i++, usleep(N_TRANS_SLEEP))
-        if (kill(pid, SIGUSR1))
-            return EXIT_ERROR;
-    if (kill(pid, SIGUSR2))
-        return EXIT_ERROR;
-    usleep(N_TRANS_SLEEP);
     return EXIT_SUCCESS;
 }

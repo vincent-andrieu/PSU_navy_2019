@@ -40,11 +40,14 @@ static player_t *get_player_maps(int argc, char **argv)
 
 int navy(int argc, char **argv)
 {
-    player_t *player = get_player_maps(argc, argv);
+    player_t *player = NULL;
     int enemy_pid;
 
+    if (argc < 2 || argc > 3)
+        return EXIT_ERROR;
+    player = get_player_maps(argc, argv);
     if (player == NULL)
-        return exit_navy(player, EXIT_ERROR);
+        return EXIT_ERROR;
     enemy_pid = init_connection(argc, argv[1]);
     if (enemy_pid <= 0)
         return exit_navy(player, EXIT_ERROR);

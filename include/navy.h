@@ -18,7 +18,7 @@
 #define MAX_HITS_NBR 14
 #define MAP_SIZE 8
 #define N_TRANS_SLEEP 10 * 1000
-#define CONNECT_VALS 10
+#define CONNECT_VALS 7
 
 #define HIT "x"
 #define MISS "o"
@@ -54,16 +54,13 @@ int **get_int_array(void);
 int init_connection(int argc, char *str_pid);
 int send_values(int pid, int x, int y);
 receive_t receive_values();
-void increase_status(__attribute((unused))int sig,
-                    __attribute((unused))siginfo_t *siginfo,
-                    __attribute((unused))void *context);
-void increase_values(__attribute((unused))int sig, siginfo_t *siginfo,
-                    __attribute((unused))void *context);
+void sig_signal(int sig, siginfo_t *siginfo,
+                __attribute((unused))void *context);
 
 int game(player_t *player, int pid, bool is_player);
 void my_display_map(int **my_map);
 void put_positions(player_t *player);
-int attack(player_t *player, int pid);
-int defend(player_t *player, int pid);
+int attack(player_t *player, int pid, char *error);
+int defend(player_t *player, int pid, bool error);
 
 #endif
