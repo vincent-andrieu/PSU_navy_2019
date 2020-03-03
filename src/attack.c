@@ -6,9 +6,23 @@
 */
 
 #include <stdio.h>
+#include <stdbool.h>
 #include <unistd.h>
 #include "my.h"
 #include "navy.h"
+
+static bool is_wrong_position(char *pos)
+{
+    if (my_strlen(pos) > 2 && (pos[2] != '\n' && pos[2] != '\0'))
+        return true;
+    if (my_strlen(pos) <= 2)
+        return true;
+    if (pos[0] < 'A' || pos[0] > 'H')
+        return true;
+    if (pos[1] < '1' || pos[1] > '8')
+        return true;
+    return false;
+}
 
 static char *ask_attack(void)
 {
@@ -23,8 +37,7 @@ static char *ask_attack(void)
         my_put_error_str("Read failure\n");
         return NULL;
     }
-    if ((my_strlen(pos) > 2 && (pos[2] != '\n' && pos[2] != '\0'))
-        || my_strlen(pos) <= 2) {
+    if (is_wrong_position(pos)) {
         free(pos);
         my_putstr("wrong position\n");
         return ask_attack();
