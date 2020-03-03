@@ -18,8 +18,9 @@ static int edit_map(player_t *player, int pid, int const x, int const y)
         my_putstr(": hit\n\n");
         if (send_values(pid, 1, 0))
             return EXIT_ERROR;
-    } else if (player->map_player[y][x] != HIT_VALUE) {
-        player->map_player[y][x] = MISS_VALUE;
+    } else {
+        if (player->map_player[y][x] != HIT_VALUE)
+            player->map_player[y][x] = MISS_VALUE;
         my_putstr(": missed\n\n");
         if (send_values(pid, 0, 1))
             return EXIT_ERROR;
