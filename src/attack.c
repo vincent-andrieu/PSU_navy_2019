@@ -23,9 +23,11 @@ static char *ask_attack(void)
         my_put_error_str("Read failure\n");
         return NULL;
     }
-    if (my_strlen(pos) > 2 && (pos[2] != '\n' && pos[2] != '\0')) {
+    if ((my_strlen(pos) > 2 && (pos[2] != '\n' && pos[2] != '\0'))
+        || my_strlen(pos) <= 2) {
         free(pos);
-        return NULL;
+        my_putstr("wrong position\n");
+        return ask_attack();
     }
     pos[2] = '\0';
     return pos;
